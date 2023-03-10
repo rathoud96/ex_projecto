@@ -13,10 +13,11 @@ defmodule ExProjecto.Users do
   end
 
   def get_all(point) do
-    query = from u in User,
-    where: u.points > ^point,
-    select: u,
-    limit: 2
+    query =
+      from u in User,
+        where: u.points > ^point,
+        select: u,
+        limit: 2
 
     query |> Repo.all()
   end

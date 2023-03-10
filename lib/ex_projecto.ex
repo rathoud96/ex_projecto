@@ -15,7 +15,8 @@ defmodule ExProjecto do
   end
 
   def init(_) do
-    schedule_for_every(1 * 60 * 1000)# In 1 minute
+    # In 1 minute
+    schedule_for_every(1 * 60 * 1000)
     {:ok, %{min_number: Enum.random(0..100), timestamp: nil}}
   end
 
@@ -27,14 +28,16 @@ defmodule ExProjecto do
 
   def handle_call(:get_users, _from, state) do
     users = Users.get_all(state.min_number)
-    {:reply, {:ok, %{users: users, timestamp: state.timestamp}}, Map.put(state, :timestamp, DateTime.utc_now() |> to_string())}
+
+    {:reply, {:ok, %{users: users, timestamp: state.timestamp}},
+     Map.put(state, :timestamp, DateTime.utc_now() |> to_string())}
   end
 
   defp schedule_for_every(time) do
     Process.send_after(self(), :update_point, time)
   end
 
-  #Client Calls
+  # Client Calls
 
   def get_users do
     GenServer.call(__MODULE__, :get_users)

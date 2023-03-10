@@ -8,6 +8,6 @@ defmodule ExProjectoWeb.PageController do
 
     conn
     |> put_status(:ok)
-    |> render( "list.json", users: response.users, timestamp: response.timestamp)
+    |> render("list.json", users: response.users, timestamp: response.timestamp)
   end
 end
