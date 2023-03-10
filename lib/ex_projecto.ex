@@ -27,7 +27,7 @@ defmodule ExProjecto do
   end
 
   def handle_call(:get_users, _from, state) do
-    users = Users.get_all(state.min_number)
+    users = Users.get_users(state.min_number)
 
     {:reply, {:ok, %{users: users, timestamp: state.timestamp}},
      Map.put(state, :timestamp, DateTime.utc_now() |> to_string())}

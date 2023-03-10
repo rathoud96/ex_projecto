@@ -6,13 +6,15 @@ defmodule ExProjecto.Users do
   alias ExProjecto.Schema.User
   import Ecto.Query, only: [from: 2]
 
-  def create() do
+  def create do
     %User{}
     |> User.changeset()
     |> Repo.insert!()
   end
 
-  def get_all(point) do
+  #TODO use better function name
+  @spec get_users(point::number) :: list(any())
+  def get_users(point) do
     query =
       from u in User,
         where: u.points > ^point,
@@ -22,10 +24,11 @@ defmodule ExProjecto.Users do
     query |> Repo.all()
   end
 
-  def all() do
+  def all do
     Repo.all(User)
   end
 
+  @spec update_points(user:: %User{}, point:: number) :: %User{}
   def update_points(user, point) do
     Repo.update!(User.changeset(user, %{points: point}))
   end
