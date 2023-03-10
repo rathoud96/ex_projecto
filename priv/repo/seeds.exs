@@ -12,6 +12,6 @@
 
 alias ExProjecto.Users
 
-for i <- 1..1000_00 do
+for _i <- 1..1000_00 do
   Users.create()
 end
