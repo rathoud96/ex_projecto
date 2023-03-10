@@ -14,12 +14,12 @@ defmodule ExProjectoWeb.PageControllerTest do
 
   defp create_users(_) do
     for _i <- 1..100 do
-      user = Users.create()
+      Users.create()
     end
 
     {:ok, state} = ExProjecto.init(%{})
     # :timer.sleep(60 * 1000)
-    users = Users.get_all(state.min_number)
+    users = Users.get_users(state.min_number)
     %{users: users}
   end
 end

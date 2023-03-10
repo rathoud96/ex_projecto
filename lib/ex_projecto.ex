@@ -23,6 +23,7 @@ defmodule ExProjecto do
   def handle_info(:update_point, state) do
     users = Users.all()
     Enum.map(users, fn user -> Users.update_points(user, Enum.random(0..100)) end)
+    schedule_for_every(1 * 60 * 1000)
     {:noreply, Map.put(state, :min_number, Enum.random(0..100))}
   end
 
